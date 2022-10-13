@@ -2,6 +2,7 @@ body {
   height: 100vh;
   padding: 0;
   margin: 0;
+  font-family: "Courier New", "Lucida Sans Unicode", Arial, sans-serif;
 }
 
 .content {
@@ -14,6 +15,7 @@ body {
     linear-gradient(217deg, rgba(117, 194, 218, 0.8), rgba(255,0,0,0) 70.71%),
     linear-gradient(127deg, rgba(176, 133, 216, 0.8), rgba(0,255,0,0) 70.71%),
     linear-gradient(336deg, rgba(127, 207, 183, 0.8), rgba(0,0,255,0) 70.71%);
+  color: #263D42;
 }
 
 footer {
@@ -22,27 +24,29 @@ footer {
 }
 
 .calculator {
-  background-color: #CCDBDC;
   height: 75%;
   width: 30%;
-  opacity: 0.5;
+  opacity: 0.6;
 }
 
 #answer {
   width: 100%;
   height: 15%;
-  border: 1px solid grey;
+  background-color: #CCDBDC;
+  opacity: 0.6;
 }
 
 #input-box {
   width: inherit;
   height: 5%;
+  width: 100%;
+  background-color: #CCDBDC;
+  opacity: 0.6;
 }
 
 #keypad {
   width: 100%;
   height: 80%;
-  border: 1px solid black;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -58,11 +62,17 @@ footer {
 .btn {
   width: 17%;
   height: 100%;
-  border: 1px solid grey;
+  border: 1px solid rgb(211, 210, 210);
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  font-family: "Courier New", "Lucida Sans Unicode", Arial, sans-serif;
   font-size: 36px;
+  background-color: #CCDBDC;
+  color: #77797a;
+}
+
+.color {
+  background-color: #48435c9d;
+  color: #CCDBDC;
 }

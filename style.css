@@ -1,4 +1,6 @@
 body {
+  display: flex;
+  flex-direction: column;
   height: 100vh;
   padding: 0;
   margin: 0;
@@ -10,7 +12,6 @@ body {
   flex: 1;
   justify-content: center;
   align-items: center;
-  height: 98vh;
   background: 
     linear-gradient(217deg, rgba(117, 194, 218, 0.8), rgba(255,0,0,0) 70.71%),
     linear-gradient(127deg, rgba(176, 133, 216, 0.8), rgba(0,255,0,0) 70.71%),
@@ -19,8 +20,8 @@ body {
 }
 
 footer {
-  height: 2vh;
   background-color: rgba(127, 207, 194, 0.644);
+  text-align: center;
 }
 
 .calculator {
@@ -34,6 +35,10 @@ footer {
   height: 15%;
   background-color: #CCDBDC;
   opacity: 0.6;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  font-size: 80px;
 }
 
 #input-box {
@@ -42,6 +47,10 @@ footer {
   width: 100%;
   background-color: #CCDBDC;
   opacity: 0.6;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  font-size: 24px;
 }
 
 #keypad {
@@ -70,6 +79,10 @@ footer {
   font-size: 36px;
   background-color: #CCDBDC;
   color: #77797a;
+}
+
+.btn:active {
+  transform: scale(0.98);
 }
 
 .color {

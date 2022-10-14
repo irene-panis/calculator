@@ -25,9 +25,10 @@ footer {
 }
 
 .calculator {
-  height: 75%;
-  width: 30%;
+  height: 775px;
+  width: 600px;
   opacity: 0.6;
+  flex: 0 1 auto;
 }
 
 #answer {
@@ -39,6 +40,7 @@ footer {
   justify-content: flex-end;
   align-items: flex-end;
   font-size: 80px;
+  overflow: hidden;
 }
 
 #input-box {

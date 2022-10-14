@@ -47,11 +47,13 @@ const operators = document.querySelectorAll('.oper');
 const input = document.querySelector('#input-box');
 const answer = document.querySelector('#answer');
 const clear = document.querySelector('#clear');
+const empty = document.querySelector('#empty');
 const backspace = document.querySelector('#backspace');
 const equals = document.querySelector('#equals');
 let displayValue;
 let firstNumber;
 let operatorChosen;
+let easter = true;
 let stringed;
 let over;
 let temp = '';
@@ -59,6 +61,7 @@ let buttonsToggle = false;
 
 numbers.forEach((number) => {
   number.addEventListener('click', () => {
+    easter = false;
     buttonsToggle = true;
     if (!stringed && !over) {
       answer.innerHTML += number.textContent;
@@ -158,3 +161,12 @@ function clearDisplayValue() {
   input.innerHTML = '';
   answer.innerHTML = '';
 }
+
+empty.addEventListener('click', () => {
+  answer.innerHTML = 'hi :)';
+  timer();
+}, {once: true});
+
+function timer() {
+  setTimeout(() => {answer.innerHTML = '';}, 3000);
+};

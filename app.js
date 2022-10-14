@@ -1,25 +1,29 @@
 function add(a, b) {
   a = parseFloat(a);
   b = parseFloat(b);
-  return a + b;
+  let rounded = parseFloat((a+b).toFixed(4));
+  return rounded;
 }
 
 function subtract(a, b) {
   a = parseFloat(a);
   b = parseFloat(b);
-  return a - b;
+  let rounded = parseFloat((a-b).toFixed(4));
+  return rounded;
 }
 
 function multiply(a, b) {
   a = parseFloat(a);
   b = parseFloat(b);
-  return a * b;
+  let rounded = parseFloat((a*b).toFixed(4));
+  return rounded;
 }
 
 function divide(a, b) {
   a = parseFloat(a);
   b = parseFloat(b);
-  return a / b;
+  let rounded = parseFloat((a/b).toFixed(4));
+  return rounded;
 }
 
 function operate(operator, a, b) {
@@ -34,10 +38,11 @@ function operate(operator, a, b) {
 
 function percentage(a, b) {
   let percent = a / 100;
-  return percent * b;
+  let rounded = parseFloat((percent*b).toFixed(4));
+  return rounded;
 }
 
-const buttons = document.querySelectorAll('.disp');
+const numbers = document.querySelectorAll('.disp');
 const operators = document.querySelectorAll('.oper');
 const input = document.querySelector('#input-box');
 const answer = document.querySelector('#answer');
@@ -47,27 +52,59 @@ const equals = document.querySelector('#equals');
 let displayValue;
 let firstNumber;
 let operatorChosen;
+let stringed;
+let over;
+let temp = '';
+let buttonsToggle = false;
 
-buttons.forEach((button) => {
-  button.addEventListener('click', () => {
-    answer.innerHTML += button.textContent;
-    displayValue = answer.innerHTML;
+numbers.forEach((number) => {
+  number.addEventListener('click', () => {
+    buttonsToggle = true;
+    if (!stringed && !over) {
+      answer.innerHTML += number.textContent;
+      displayValue = answer.innerHTML;
+    } else if (stringed) {
+      answer.innerHTML = '';
+      temp += number.textContent;
+      answer.innerHTML += temp;
+      displayValue = answer.innerHTML;
+    } else if (over) {
+      answer.innerHTML = '';
+      temp += number.textContent;
+      answer.innerHTML += temp;
+      displayValue = answer.innerHTML;
+    }
   });
 });
 
+let opFunc = function(e) {
+  if (buttonsToggle) {
+    stringed = false;
+  if (input.innerHTML === '') {
+    answer.innerHTML = '';
+    operatorChosen = e.target.id;
+    input.innerHTML = `${displayValue}${convertOperator(operatorChosen)}`;
+    firstNumber = displayValue;
+    temp = '';
+  } else {
+    if (operatorChosen === "divide" && displayValue == 0) {
+      displayValue = 1;
+      alert("Not allowed to divide by zero! Input changed to 1.");
+    };
+    answer.innerHTML = operate(operatorChosen, firstNumber, displayValue);
+    firstNumber = answer.innerHTML;
+    operatorChosen = e.target.id;
+    input.innerHTML = `${firstNumber}${convertOperator(operatorChosen)}`;
+    stringed = true;
+    temp = '';
+  }
+  buttonsToggle = false;
+  };
+};
+
 operators.forEach((button) => {
-  button.addEventListener('click', () => {
-    if (input.innerHTML === '') {
-      answer.innerHTML = '';
-      input.innerHTML = displayValue;
-      firstNumber = convertDisplay(displayValue);
-      operatorChosen = button.id;
-    } else {
-      answer.innerHTML = operate(operatorChosen, firstNumber, convertDisplay(displayValue));
-      firstNumber = answer.innerHTML;
-      input.innerHTML = '';
-    }
-  });
+  button.addEventListener('click', opFunc);
+  
 });
 
 function convertOperator(operator) {
@@ -76,32 +113,44 @@ function convertOperator(operator) {
     case "subtract": return "-"; break;
     case "multiply": return "×"; break;
     case "divide": return "÷"; break;
-    case "percentage": return "%"; break;
+    case "percentage": return "% of"; break;
   }
 }
 
 function convertDisplay(str) {
-  return parseFloat(str.split(/\D/)[0]);
+  return parseFloat(str.split(/[-+%×÷]/)[0]);
 }
 
 clear.addEventListener('click', () => {
   clearDisplayValue();
   firstNumber = null;
   operatorChosen = null;
+  stringed = false;
+  temp = '';
 });
 
 backspace.addEventListener('click', () => {
-  if (input.innerHTML !== '') {
-    input.innerHTML = displayValue.slice(0, -1);
-    displayValue = input.innerHTML;
+  if (answer.innerHTML !== '') {
+    answer.innerHTML = displayValue.slice(0, -1);
+    displayValue = answer.innerHTML;
   };
 });
 
 equals.addEventListener('click', () => {
-  answer.innerHTML = '';
-  input.innerHTML = '';
-  let secondNumber = convertDisplay(displayValue);
-  answer.innerHTML = operate(operatorChosen, firstNumber, secondNumber);
+  if (answer.innerHTML !== '') {
+    answer.innerHTML = '';
+    input.innerHTML = '';
+    let secondNumber = convertDisplay(displayValue);
+    if (operatorChosen === "divide" && secondNumber === 0) {
+      secondNumber = 1;
+      alert("Not allowed to divide by zero! Input changed to 1.");
+    }
+    answer.innerHTML = operate(operatorChosen, firstNumber, secondNumber);
+    displayValue = answer.innerHTML;
+    stringed = false;
+    over = true;
+    temp = '';
+  } 
 });
 
 function clearDisplayValue() {

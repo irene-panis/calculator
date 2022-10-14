@@ -21,7 +21,11 @@ body {
 
 footer {
   background-color: rgba(127, 207, 194, 0.644);
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  color:rgba(65, 138, 126, 0.8);
 }
 
 .calculator {

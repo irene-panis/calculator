@@ -9,3 +9,6 @@ This is a simple calculator application that can be used to perform arithmetic (
 This app was made with HTML, CSS, and lots of JavaScript. I think the most difficult part was getting the logic down for displaying values and storing them, but thankfully I managed to find something that worked.<br/>
 
 Unfortunately, no keyboard support yet, but I'd love to revisit this project one day and try my hand at adding it (and maybe fix up the messy code too).<br/>
+
+Known issues: <br/>
+-Backspace button not properly clearing stored information
